@@ -1,3 +1,16 @@
 # Temp Files
 *~
 .*.swp
+
+# Htodo Database
+.htodo.db
+
+# C complie files
+*.o
+
+# QMake output
+Makefile
+moc_*
+
+# Executable
+qvdpautest
