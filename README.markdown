@@ -46,11 +46,18 @@ This is not an exhaustive list but will highlight some things that you will need
 
 ## Compile and run:
 
-qmake ( or qmake-qt4 )
-make
+Just open a terminal and type in the following commands.
 
-(SET POWERMIZER TO "Maximum Performance")
-./qvdpautest
+    $ qmake   # or qmake-qt4
+    $ make
+
+NVidia users please SET POWERMIZER TO "Maximum Performance" in nvidia-settings.
+
+Then you should be able to run the test suite using:
+
+    ./qvdpautest
+
+The results will appear once the test is complete.
 
 ## Questions and Comments 
 
