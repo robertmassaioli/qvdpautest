@@ -1,5 +1,8 @@
 # qvdpautest - VDPAU Testing Tool
 
+*Important:* I, Robert Massaioli, am not the original author of this tool. But I do maintain it in the
+hope that it continues to be as useful to other people as it is to me.
+
 This is a little VDPAU benchmarking tool.
 For example, there are the results on a GT216 :
 
