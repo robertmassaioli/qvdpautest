@@ -622,7 +622,9 @@ QString VdpauWidget::benchH264()
    if ( !vc->isProfileSupported( VDPAUContext::ProfileH264Main) )
       return "Profile unsupported.\n";
 
-   H264Decoder *d = new H264Decoder( vc );
+   QString directoryName(dataDirectory);
+   directoryName.append("h264hd.dat");
+   H264Decoder *d = new H264Decoder( vc, directoryName );
    if ( !d->init() ) {
       delete d;
       return "Can't initialize H264 decoder!\n";
