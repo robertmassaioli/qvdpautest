@@ -8,8 +8,6 @@
 
 #include "vdpauwidget.h"
 
-
-
 class MainWidget : public QStackedWidget
 {
    Q_OBJECT

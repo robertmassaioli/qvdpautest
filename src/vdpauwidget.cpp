@@ -515,7 +515,7 @@ QString VdpauWidget::benchMPEG4()
    if ( !vc->isProfileSupported( VDPAUContext::ProfileMPEG4ASP) )
       return "Profile unsupported.\n";
 #ifdef VDP_DECODER_PROFILE_MPEG4_PART2_ASP
-   MPEG4Decoder *d = new MPEG4Decoder( vc );
+   MPEG4Decoder *d = new MPEG4Decoder( vc, dataDirectory );
    if ( !d->init() ) {
       delete d;
       return "Can't initialize MPEG4 decoder!\n";
@@ -550,7 +550,9 @@ QString VdpauWidget::benchMPEG()
    if ( !vc->isProfileSupported( VDPAUContext::ProfileMPEG2Main) )
       return "Profile unsupported.\n";
 
-   MPEGDecoder *d = new MPEGDecoder( vc );
+   QString directoryName(dataDirectory);
+   directoryName.append("mpghd.dat");
+   MPEGDecoder *d = new MPEGDecoder( vc, directoryName );
    if ( !d->init() ) {
       delete d;
       return "Can't initialize MPEG decoder!\n";
@@ -759,7 +761,9 @@ QString VdpauWidget::getContext()
 QString VdpauWidget::benchMT()
 {
    // init a mpeg decoder
-   MPEGDecoder *m = new MPEGDecoder( vc );
+   QString directoryName(dataDirectory);
+   directoryName.append("mpghd.dat");
+   MPEGDecoder *m = new MPEGDecoder( vc, directoryName );
    if ( !m->init() ) {
       delete m;
       return "Can't initialize MPEG decoder (1)!";
@@ -782,7 +786,10 @@ QString VdpauWidget::benchMT()
    VdpauThread vt( vc, m->getOrderedFrames(), mixer, mixerSurface, m->width, m->height );
 
    // ... so we can create a new one here
-   MPEGDecoder *d = new MPEGDecoder( vc );
+   directoryName.clear();
+   directoryName.append(dataDirectory);
+   directoryName.append("mpghd.dat");
+   MPEGDecoder *d = new MPEGDecoder( vc, directoryName );
    if ( !d->init( true ) ) {
       delete d;
       delete m;

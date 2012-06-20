@@ -30,7 +30,7 @@ public:
 class MPEG4Decoder
 {
 public:
-	MPEG4Decoder( VDPAUContext *v );
+	MPEG4Decoder( VDPAUContext *v, QString dataDirectory );
 	~MPEG4Decoder();
 	bool init();
 	VdpVideoSurface getNextFrame();
@@ -46,6 +46,7 @@ private:
 	VdpVideoSurface backwardRef, forwardRef, currentSurface;
 	int currentFrame;
 	QList< MPEG4Frame* > frames;
+   QString dataFilename;
 };
 #endif // VDP_DECODER_PROFILE_MPEG4_PART2_ASP
 

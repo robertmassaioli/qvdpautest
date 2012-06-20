@@ -8,10 +8,12 @@
 
 
 
-MPEG4Decoder::MPEG4Decoder( VDPAUContext *v )
+MPEG4Decoder::MPEG4Decoder( VDPAUContext *v, QString dataDirectory )
 {
 	vc = v;
 	decoder = VDP_INVALID_HANDLE;
+   dataFilename.append(dataDirectory);
+   dataFilename.append("mpeg4hd.dat");
 }
 
 
@@ -33,9 +35,9 @@ MPEG4Decoder::~MPEG4Decoder()
 
 bool MPEG4Decoder::init()
 {
-	QFile file( "mpeg4hd.dat" );
+	QFile file(dataFilename);
 	if ( !file.open(QIODevice::ReadOnly) ) {
-		fprintf( stderr, "MPEG4Decoder: FATAL: Can't open mpeg4hd.dat !!\n" );
+      fprintf( stderr, "%s", QString("MPEG4Decoder: FATAL: Can't open %1 !!\n").arg(dataFilename).toLatin1().data() );
 		return false;
 	}
 
