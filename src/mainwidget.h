@@ -14,7 +14,7 @@ class MainWidget : public QStackedWidget
 {
 	Q_OBJECT
 public:
-	MainWidget();
+	MainWidget(QString dataDirectory);
 	
 private slots:
 	void nextStep();

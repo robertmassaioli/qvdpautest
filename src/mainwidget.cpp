@@ -9,12 +9,12 @@
 
 
 
-MainWidget::MainWidget() : QStackedWidget()
+MainWidget::MainWidget(QString dataDirectory) : QStackedWidget()
 {
 	te = new QTextEdit();
 	te->setReadOnly( true );
 	
-	vw = new VdpauWidget();
+	vw = new VdpauWidget(dataDirectory);
 	
 	lab = new QLabel( "For better results, make sure PowerMizer (if any) is set to Maximum Performance.\nIn the following tests, all images will be displayed in DECODING order." );
 	lab->setAlignment( Qt::AlignCenter );

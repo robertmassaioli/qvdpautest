@@ -40,7 +40,7 @@ class VdpauWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	VdpauWidget( QWidget *parent=0 );
+	VdpauWidget( QString dataDirectory, QWidget *parent=0 );
 	QString initVdpau();
 	QString benchSurface();
 	QString benchMPEG();
@@ -63,6 +63,7 @@ private:
 	void setSkipChroma( int on );
 	void setHqScaling( int on );
 	VDPAUContext *vc;
+   QString dataDirectory;
 	QString benchSurfaceResult, benchMPEGResult, benchMPEG720pResult, benchH264Result, benchH264720pResult, benchVC1Result, benchMPEG4Result, benchMixerResult, benchMTResult, benchSingleResult;
 	
 	VdpOutputSurface displaySurface, mixerSurface;

@@ -6,10 +6,13 @@
 
 
 
-VC1Decoder::VC1Decoder( VDPAUContext *v )
+VC1Decoder::VC1Decoder( VDPAUContext *v, QString dataDirectory )
 {
 	vc = v;
 	decoder = VDP_INVALID_HANDLE;
+
+   dataFilename.append(dataDirectory);
+   dataFilename.append("vc1hd.dat");
 }
 
 
@@ -31,9 +34,9 @@ VC1Decoder::~VC1Decoder()
 
 bool VC1Decoder::init()
 {
-	QFile file( "vc1hd.dat" );
+	QFile file( dataFilename );
 	if ( !file.open(QIODevice::ReadOnly) ) {
-		fprintf( stderr, "VC1Decoder: FATAL: Can't open vc1hd.dat !!\n" );
+		fprintf( stderr, "%s", QString("VC1Decoder: FATAL: Can't open %1 !!\n").arg(dataFilename).toLatin1().data() );
 		return false;
 	}
 	

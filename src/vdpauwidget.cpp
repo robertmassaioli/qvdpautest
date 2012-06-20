@@ -25,9 +25,10 @@
 
 #define MIXER_LOOP 50
 
+#include <iostream>
 
 
-VdpauWidget::VdpauWidget( QWidget *parent ) : QWidget( parent )
+VdpauWidget::VdpauWidget( QString dataDir, QWidget *parent ) : QWidget( parent )
 {
 	QPalette palette = this->palette();
 	palette.setColor(backgroundRole(), Qt::black);
@@ -39,6 +40,8 @@ VdpauWidget::VdpauWidget( QWidget *parent ) : QWidget( parent )
 	vc = new VDPAUContext( x11Info().display(), x11Info().screen() );
 	mixer = VDP_INVALID_HANDLE;
 	mixerWidth = mixerHeight = 0;
+   dataDirectory = dataDir;
+   std::cout << "VDPAU datadir: " << dataDirectory.toStdString() << std::endl;
 }
 
 
@@ -174,7 +177,9 @@ void VdpauWidget::displayFrame( VdpVideoSurface surface, int w, int h, double ra
 
 QString VdpauWidget::benchMixer()
 {
-	MPEGDecoder *d = new MPEGDecoder( vc );
+   QString directoryName(dataDirectory);
+   directoryName.append("mpghd.dat");
+	MPEGDecoder *d = new MPEGDecoder( vc, directoryName );
 	if ( !d->init() ) {
 		delete d;
 		return "Can't initialize MPEG decoder!";
@@ -393,7 +398,11 @@ QString VdpauWidget::benchMixer()
 	
 	// SD
 	
-	d = new MPEGDecoder( vc, "mpgsd.dat" );
+   directoryName.clear();
+   directoryName.append(dataDirectory);
+   directoryName.append("mpgsd.dat");
+   std::cout << "Directory name: " << directoryName.toStdString() << std::endl;
+	d = new MPEGDecoder( vc, directoryName );
 	if ( !d->init() ) {
 		delete d;
 		return "Can't initialize MPEG decoder!";
@@ -481,7 +490,7 @@ QString VdpauWidget::benchVC1()
 	if ( !vc->isProfileSupported( VDPAUContext::ProfileVC1Main) )
 		return "Profile unsupported.\n";
 
-	VC1Decoder *d = new VC1Decoder( vc );
+	VC1Decoder *d = new VC1Decoder( vc , dataDirectory);
 	if ( !d->init() ) {
 		delete d;
 		return "Can't initialize VC1 decoder!\n";
@@ -584,7 +593,9 @@ QString VdpauWidget::benchMPEG720p()
 	if ( !vc->isProfileSupported( VDPAUContext::ProfileMPEG2Main) )
 		return "Profile unsupported.\n";
 
-	MPEGDecoder *d = new MPEGDecoder( vc, "mpg720p.dat" );
+   QString directoryName(dataDirectory);
+   directoryName.append("mpg720p.dat");
+	MPEGDecoder *d = new MPEGDecoder( vc, directoryName );
 	if ( !d->init() ) {
 		delete d;
 		return "Can't initialize MPEG decoder!\n";
@@ -652,7 +663,9 @@ QString VdpauWidget::benchH264720p()
 	if ( !vc->isProfileSupported( VDPAUContext::ProfileH264High) )
 		return "Profile unsupported.\n";
 
-	H264Decoder *d = new H264Decoder( vc, "h264720p.dat" );
+   QString directoryName(dataDirectory);
+   directoryName.append("h264720p.dat");
+	H264Decoder *d = new H264Decoder( vc, directoryName );
 	if ( !d->init() ) {
 		delete d;
 		return "Can't initialize H264 decoder!\n";

@@ -1,17 +1,26 @@
 // kate: tab-indent on; indent-width 4; mixedindent off; indent-mode cstyle; remove-trailing-space on;
 #include <QtGui>
-
 #include "mainwidget.h"
-
-
 
 int main(int argc, char **argv)
 {
-	QApplication app(argc, argv);
-	
-	MainWidget *mw = new MainWidget();
+   QApplication app(argc, argv);
 
-	mw->show();
+   QString directoryString("");
+   if(argc > 1) {
+      directoryString.append(argv[1]);
+   } else {
+      directoryString.append("./");
+   }
 
-	return app.exec();
+   if(!directoryString.endsWith("/")) {
+      directoryString.append("/");
+   }
+
+   cout << "Init directory string: " << directoryString.toStdString() << endl;
+   MainWidget *mw = new MainWidget(directoryString);
+
+   mw->show();
+
+   return app.exec();
 }

@@ -27,7 +27,7 @@ public:
 class VC1Decoder
 {
 public:
-	VC1Decoder( VDPAUContext *v );
+	VC1Decoder( VDPAUContext *v, QString dataDirectory );
 	~VC1Decoder();
 	bool init();
 	VdpVideoSurface getNextFrame();
@@ -43,5 +43,6 @@ private:
 	VdpVideoSurface backwardRef, forwardRef, currentSurface;
 	int currentFrame;
 	QList< VC1Frame* > frames;	
+   QString dataFilename;
 };
 #endif // VC1DECODER_H
