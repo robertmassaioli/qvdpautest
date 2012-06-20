@@ -42,6 +42,7 @@ For example, there are the results on a GT216 :
 You will require the following dependencies:
 
  - A basic build environment with C++
+ - CMake
  - qt Dev Tools (like qmake)
  - Something that will provide libvdpau.so
 
@@ -49,22 +50,26 @@ This is not an exhaustive list but will highlight some things that you will need
 
 ## Compile and run:
 
-Just open a terminal and type in the following commands.
+We use cmake to compile this tool. Just open a terminal and type in the following commands:
 
-    $ qmake   # or qmake-qt4
+    $ cd <qvdpautest dir>
+    $ mkdir localbuild && cd localbuild
+    $ cmake ..
     $ make
 
 NVidia users please SET POWERMIZER TO "Maximum Performance" in nvidia-settings.
 
 Then you should be able to run the test suite using:
 
-    ./qvdpautest
+    $ cd localbuild
+    $ ./srcqvdpautest ../data
 
 The results will appear once the test is complete.
 
 ## Questions and Comments 
 
-Lemme know if it doesn't work as expected.
+Let me know if it doesn't work as expected.
 hftom@free.fr
 
+Maintainer: Robert Massaioli <robertmassaioli@gmail.com>
 

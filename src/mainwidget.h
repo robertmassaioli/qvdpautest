@@ -8,25 +8,23 @@
 
 #include "vdpauwidget.h"
 
-
-
 class MainWidget : public QStackedWidget
 {
-	Q_OBJECT
-public:
-	MainWidget();
-	
-private slots:
-	void nextStep();
+   Q_OBJECT
+   public:
+      MainWidget(QString dataDirectory);
 
-private:
-	QString getCPUModel();
-	QString getGPUModel();
-	QTextEdit *te;
-	VdpauWidget *vw;
-	QLabel *lab;
-	QTimer timer;
-	
-	int step;
+      private slots:
+         void nextStep();
+
+   private:
+      QString getCPUModel();
+      QString getGPUModel();
+      QTextEdit *te;
+      VdpauWidget *vw;
+      QLabel *lab;
+      QTimer timer;
+
+      int step;
 };
 #endif // MAINWIDGET_H

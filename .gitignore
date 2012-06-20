@@ -1,3 +1,6 @@
+# Local Build Dir
+localbuild
+
 # Temp Files
 *~
 .*.swp
@@ -6,6 +9,7 @@
 .htodo.db
 
 # C complie files
+cscope.out
 *.o
 
 # QMake output

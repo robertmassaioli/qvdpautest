@@ -1,50 +1,53 @@
 // kate: tab-indent on; indent-width 4; mixedindent off; indent-mode cstyle; remove-trailing-space on;
-#ifndef MPEGDECODER_H
-#define MPEGDECODER_H
+#ifndef MPEG4DECODER_H
+#define MPEG4DECODER_H
 
 #include <QList>
 
 #include "vdpaucontext.h"
 
+#ifdef VDP_DECODER_PROFILE_MPEG4_PART2_ASP
 
 
-class MPEGFrame
+
+class MPEG4Frame
 {
 public:
-	MPEGFrame() {
+	MPEG4Frame() {
 		data = NULL;
 	}
-	~MPEGFrame() {
+	~MPEG4Frame() {
 		if ( data ) delete data;
 	}
-	VdpPictureInfoMPEG1Or2 info;
+
+	VdpPictureInfoMPEG4Part2 info;
 	int dataLength;
 	uint8_t *data;
 };
 
 
 
-class MPEGDecoder
+class MPEG4Decoder
 {
 public:
-	MPEGDecoder( VDPAUContext *v, QString filename="mpghd.dat" );
-	~MPEGDecoder();
-	bool init( bool decodeOnly=false );
+	MPEG4Decoder( VDPAUContext *v, QString dataDirectory );
+	~MPEG4Decoder();
+	bool init();
 	VdpVideoSurface getNextFrame();
-	QList< VdpVideoSurface > getOrderedFrames();
-	
+
 	uint32_t width, height;
 	double ratio;
-	
+
 private:
 	VDPAUContext *vc;
 	VdpDecoderProfile profile;
 	VdpDecoder decoder;
-	VdpVideoSurface surfaces[NUMSURFACES];
+	VdpVideoSurface surfaces[3];
 	VdpVideoSurface backwardRef, forwardRef, currentSurface;
 	int currentFrame;
-	QList< MPEGFrame* > frames;
-	QString testFile;
-	bool onlyDecode;
+	QList< MPEG4Frame* > frames;
+   QString dataFilename;
 };
-#endif // MPEGDECODER_H
+#endif // VDP_DECODER_PROFILE_MPEG4_PART2_ASP
+
+#endif // MPEG4DECODER_H
