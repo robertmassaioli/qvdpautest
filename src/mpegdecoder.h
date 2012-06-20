@@ -10,41 +10,41 @@
 
 class MPEGFrame
 {
-public:
-	MPEGFrame() {
-		data = NULL;
-	}
-	~MPEGFrame() {
-		if ( data ) delete data;
-	}
-	VdpPictureInfoMPEG1Or2 info;
-	int dataLength;
-	uint8_t *data;
+   public:
+      MPEGFrame() {
+         data = NULL;
+      }
+      ~MPEGFrame() {
+         if ( data ) delete data;
+      }
+      VdpPictureInfoMPEG1Or2 info;
+      int dataLength;
+      uint8_t *data;
 };
 
 
 
 class MPEGDecoder
 {
-public:
-	MPEGDecoder( VDPAUContext *v, QString filename="mpghd.dat" );
-	~MPEGDecoder();
-	bool init( bool decodeOnly=false );
-	VdpVideoSurface getNextFrame();
-	QList< VdpVideoSurface > getOrderedFrames();
-	
-	uint32_t width, height;
-	double ratio;
-	
-private:
-	VDPAUContext *vc;
-	VdpDecoderProfile profile;
-	VdpDecoder decoder;
-	VdpVideoSurface surfaces[NUMSURFACES];
-	VdpVideoSurface backwardRef, forwardRef, currentSurface;
-	int currentFrame;
-	QList< MPEGFrame* > frames;
-	QString testFile;
-	bool onlyDecode;
+   public:
+      MPEGDecoder( VDPAUContext *v, QString filename="mpghd.dat" );
+      ~MPEGDecoder();
+      bool init( bool decodeOnly=false );
+      VdpVideoSurface getNextFrame();
+      QList< VdpVideoSurface > getOrderedFrames();
+
+      uint32_t width, height;
+      double ratio;
+
+   private:
+      VDPAUContext *vc;
+      VdpDecoderProfile profile;
+      VdpDecoder decoder;
+      VdpVideoSurface surfaces[NUMSURFACES];
+      VdpVideoSurface backwardRef, forwardRef, currentSurface;
+      int currentFrame;
+      QList< MPEGFrame* > frames;
+      QString testFile;
+      bool onlyDecode;
 };
 #endif // MPEGDECODER_H
