@@ -17,7 +17,6 @@ int main(int argc, char **argv)
       directoryString.append("/");
    }
 
-   cout << "Init directory string: " << directoryString.toStdString() << endl;
    MainWidget *mw = new MainWidget(directoryString);
 
    mw->show();

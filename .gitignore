@@ -9,6 +9,7 @@ localbuild
 .htodo.db
 
 # C complie files
+cscope.out
 *.o
 
 # QMake output
