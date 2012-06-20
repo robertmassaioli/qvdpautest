@@ -5,9 +5,7 @@
 #define LONGDELAY 5000
 #define SHORTDELAY 2000
 
-#define QVDPAUTEST_VERSION "qvdpautest 0.5.1\n"
-
-
+#define QVDPAUTEST_VERSION "qvdpautest 0.5.2\n"
 
 MainWidget::MainWidget(QString dataDirectory) : QStackedWidget()
 {
