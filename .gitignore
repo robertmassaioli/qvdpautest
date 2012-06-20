@@ -1,3 +1,6 @@
+# Local Build Dir
+localbuild
+
 # Temp Files
 *~
 .*.swp
