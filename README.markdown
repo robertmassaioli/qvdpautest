@@ -39,7 +39,7 @@ For example, there are the results on a GT216 :
 
 ## Required Dependencies
 
-You will require the following dependencies:
+You will require a Linux install with the following dependencies:
 
  - A basic build environment with C++
  - CMake
@@ -50,21 +50,13 @@ This is not an exhaustive list but will highlight some things that you will need
 
 ## Compile and run:
 
-We use cmake to compile this tool. Just open a terminal and type in the following commands:
+I wrote a script that will build the code and run it for you. Just open a terminal and type in the following commands:
 
-    $ cd <qvdpautest dir>
-    $ mkdir localbuild && cd localbuild
-    $ cmake ..
-    $ make
+    $ bash -e build_and_run.bash
 
-NVidia users please SET POWERMIZER TO "Maximum Performance" in nvidia-settings.
+If this script fails then you are probably missing dependancies. The results will appear once the test is complete.
 
-Then you should be able to run the test suite using:
-
-    $ cd localbuild
-    $ ./srcqvdpautest ../data
-
-The results will appear once the test is complete.
+*Important:* NVidia users please SET POWERMIZER TO "Maximum Performance" in nvidia-settings.
 
 ## Questions and Comments 
 
