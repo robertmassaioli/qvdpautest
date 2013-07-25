@@ -99,7 +99,7 @@ void MainWidget::nextStep()
                  printf( "%s\n", res.toAscii().data() );
                  res =  vw->getContext();
                  printf( "%s", res.toAscii().data() );
-                 lab->setText( "VPAU is now initialized.\nTesting PUT/GET bits..." );
+                 lab->setText( "VDPAU is now initialized.\nTesting PUT/GET bits..." );
                  timer.start( SHORTDELAY );
                  break;
               }
