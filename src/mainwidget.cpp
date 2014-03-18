@@ -1,11 +1,11 @@
 // kate: tab-indent on; indent-width 4; mixedindent off; indent-mode cstyle; remove-trailing-space on;
 #include <QVBoxLayout>
+#include <fstream>
 #include "mainwidget.h"
+#include "Utils.h"
 
 #define LONGDELAY 5000
 #define SHORTDELAY 2000
-
-#define QVDPAUTEST_VERSION "qvdpautest 0.5.2\n"
 
 MainWidget::MainWidget(QString dataDirectory) : QStackedWidget()
 {
@@ -34,51 +34,6 @@ MainWidget::MainWidget(QString dataDirectory) : QStackedWidget()
 }
 
 
-
-QString MainWidget::getCPUModel()
-{
-   QFile file( "/proc/cpuinfo" );
-   if ( !file.open(QIODevice::ReadOnly) ) {
-      return "Unknown CPU";
-   }
-
-   QTextStream ts( &file );
-   QString line;
-   do {
-      line = ts.readLine();
-      if ( line.startsWith( "model name" ) ) {
-         return line.split( ":" ).last().trimmed();
-      }
-   } while ( !line.isNull() );
-
-   return "Unknown CPU";
-}
-
-
-
-QString MainWidget::getGPUModel()
-{
-   QFile file( "/var/log/Xorg.0.log" );
-   if ( !file.open(QIODevice::ReadOnly) ) {
-      return "Unknown GPU";
-   }
-
-   QTextStream ts( &file );
-   QString line;
-   do {
-      line = ts.readLine();
-      if ( line.contains( ": NVIDIA GPU" ) ) {
-         int pos = line.indexOf("NVIDIA GPU");
-         if ( pos!=-1 )
-            return line.right( line.length()-pos ).trimmed();
-      }
-   } while ( !line.isNull() );
-
-   return "Unknown GPU";
-}
-
-
-
 void MainWidget::nextStep()
 {
    switch ( step ) {
@@ -92,13 +47,13 @@ void MainWidget::nextStep()
                     step = -1;
                     return;
                  }
-                 QString res =  QVDPAUTEST_VERSION;
+				 std::string res(QVDPAUTEST_VERSION);
                  res += getCPUModel() + "\n";
                  res += getGPUModel() + "\n";
-                 te->append( res );
-                 printf( "%s\n", res.toAscii().data() );
-                 res =  vw->getContext();
-                 printf( "%s", res.toAscii().data() );
+                 te->append( res.c_str() );
+                 printf( "%s\n", res.c_str() );
+                 QString ctx(vw->getContext());
+                 printf( "%s", ctx.toAscii().data() );
                  lab->setText( "VDPAU is now initialized.\nTesting PUT/GET bits..." );
                  timer.start( SHORTDELAY );
                  break;
@@ -175,6 +130,12 @@ void MainWidget::nextStep()
                  QString res = vw->benchMT();
                  printf( "%s", res.toAscii().data() );
                  te->append( vw->getSummary() );
+                 std::ofstream ofs("/tmp/qvdpau-result.txt");
+				 ofs << QVDPAUTEST_VERSION;
+				 ofs << getCPUModel() << std::endl;
+				 ofs << getGPUModel() << std::endl;
+				 ofs << std::endl;
+				 ofs << vw->getSummary().toAscii().data() << std::endl;
                  setCurrentIndex( 0 );
               }
    }
