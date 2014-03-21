@@ -10,7 +10,7 @@ int main(int argc, char **argv)
    if(argc > 1) {
       directoryString.append(argv[1]);
    } else {
-      directoryString.append("/usr/share/qvdpautest/");
+      directoryString.append("./");
    }
 
    if(!directoryString.endsWith("/")) {
