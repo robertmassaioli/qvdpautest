@@ -1,5 +1,6 @@
 // kate: tab-indent on; indent-width 4; mixedindent off; indent-mode cstyle; remove-trailing-space on;
 
+#ifdef HAVE_LIBPCI
 extern "C" {
 #include <pci/pci.h>
 }
@@ -38,3 +39,4 @@ std::string PciDisplay::getFirstDisplay(void) const
 	return "Unknown GPU";
 }
 
+#endif

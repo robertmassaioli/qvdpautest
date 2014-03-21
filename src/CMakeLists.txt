@@ -1,6 +1,13 @@
 include(${QT_USE_FILE})
 pkg_check_modules(VDPAU REQUIRED vdpau)
-pkg_check_modules(LIBPCI REQUIRED libpci)
+pkg_check_modules(LIBPCI libpci)
+
+if (LIBPCI_FOUND)
+	add_definitions(-DHAVE_LIBPCI)
+	message(STATUS "found pciutils")
+else()
+	message(WARNING "didn't find pciutils")
+endif()
 
 QT4_WRAP_CPP(WIDGET_MOC_OUTFILES vdpauwidget.h mainwidget.h)
 

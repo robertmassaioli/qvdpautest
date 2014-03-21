@@ -10,11 +10,15 @@ struct pci_access;
 class PciDisplay
 {
 public:
+#ifdef HAVE_LIBPCI
 	PciDisplay();
 	~PciDisplay();
 	std::string getFirstDisplay(void) const;
 
 private:
 	struct pci_access *_pacc;
+#else
+	std::string getFirstDisplay() const { return "Unknown apple GPU"; }
+#endif
 };
 
