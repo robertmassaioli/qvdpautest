@@ -206,7 +206,7 @@ QString VdpauWidget::benchMixer()
       ++loop;
    }
    e = t.elapsed();
-   int n = (NUMSURFACES-2)*loop;
+   long n = (NUMSURFACES-2)*loop;
    benchMixerResult = QString("MIXER WEAVE (%1x%2): %3 frames/s\n").arg(d->width).arg(d->height).arg(n*1000/e);
 
    // bob
