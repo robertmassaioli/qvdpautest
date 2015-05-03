@@ -13,8 +13,20 @@ cscope.out
 *.o
 
 # QMake output
-Makefile
+/Makefile
 moc_*
 
 # Executable
-qvdpautest
+/src/qvdpautest
+
+# cmake
+CMakeFiles
+cmake_install.cmake
+/CMakeCache.txt
+
+#ninja
+/rules.ninja
+/build.ninja
+/.ninja_deps
+/.ninja_log
+

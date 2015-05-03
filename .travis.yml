@@ -1,0 +1,10 @@
+
+language: cpp
+compiler:
+#  - clang
+  - gcc
+before_script:
+  - sudo apt-get install cmake libqt4-dev libpci-dev libvdpau-dev
+script:
+  - cmake .
+  - make

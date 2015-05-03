@@ -1,3 +1,4 @@
+#pragma once
 // kate: tab-indent on; indent-width 4; mixedindent off; indent-mode cstyle; remove-trailing-space on;
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
@@ -18,8 +19,6 @@ class MainWidget : public QStackedWidget
          void nextStep();
 
    private:
-      QString getCPUModel();
-      QString getGPUModel();
       QTextEdit *te;
       VdpauWidget *vw;
       QLabel *lab;

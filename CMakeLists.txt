@@ -5,6 +5,7 @@ find_package(Threads REQUIRED)
 find_package(Qt4 REQUIRED QtCore QtGui)
 find_package(PkgConfig REQUIRED)
 
+add_subdirectory(data)
 add_subdirectory(src)
 
 #enable_testing()
