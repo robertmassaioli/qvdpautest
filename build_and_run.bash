@@ -14,6 +14,6 @@ then
    exit 1
 fi
 
-cmake ..
+QT_SELECT=qt4 cmake ..
 make
 ./src/qvdpautest ../data
